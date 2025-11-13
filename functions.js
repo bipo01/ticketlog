@@ -263,54 +263,74 @@ function updateUI2(col) {
 }
 
 function relatorio3() {
+	// Remove elementos anteriores
 	document.querySelector("table")?.remove();
 	document.querySelector("#myChart")?.remove();
 
-	// ⭐️ CORREÇÃO: Remover a formatação de moeda ao calcular 'valores'
+	const soUmMes = intervalos[0].split("/").length === 3;
+
+	// ------------------------------------------------------------
+	// 1️⃣ Labels simples (EIXO X)
+	// ------------------------------------------------------------
+	const labelsSimples = intervalos;
+
+	// ------------------------------------------------------------
+	// 2️⃣ Labels completos (para tooltip)
+	//     ✔️ corrigido para NÃO usar UTC
+	// ------------------------------------------------------------
+	const labelsCompletos = intervalos.map((intervalo) => {
+		const [dia, mes, ano] = intervalo.split("/");
+
+		// 🎯 CORREÇÃO AQUI: NÃO USE STRING!
+		const date = new Date(ano, mes - 1, dia);
+
+		const weekday = date.toLocaleDateString("pt-BR", { weekday: "long" });
+		const weekdayCap = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+
+		return `${intervalo} - ${weekdayCap}`;
+	});
+
+	// ------------------------------------------------------------
+	// 3️⃣ Calcular valores (total por intervalo)
+	// ------------------------------------------------------------
 	const valores = intervalos.map((intervalo) => {
 		const valorTotalIntervalo = body
 			.filter((row) => {
-				if (intervalo.split("/").length === 3) {
-					const dataRaw = formatExcelDate(row[4]).split(",")[0].split("/");
-					const dataOk = `${dataRaw[0]}/${dataRaw[1]}/${dataRaw[2]}`;
+				const dataRaw = formatExcelDate(row[4]).split(",")[0].split("/");
+				const dataOk = `${dataRaw[0]}/${dataRaw[1]}/${dataRaw[2]}`;
 
+				if (soUmMes) {
+					// caso seja dia/mês/ano
 					return dataOk === intervalo;
 				} else {
-					const dataRaw = formatExcelDate(row[4]).split(",")[0].split("/");
-					const dataOk = `${dataRaw[1]}/${dataRaw[2]}`;
-
-					return dataOk === intervalo;
+					// caso mês/ano
+					return `${dataRaw[1]}/${dataRaw[2]}` === intervalo;
 				}
 			})
-			.reduce((acc, cur) => {
-				// Certifica-se de que o acumulador e o valor atual são números antes da soma
-				return acc + Number(cur[19]);
-			}, 0);
+			.reduce((acc, cur) => acc + Number(cur[19]), 0);
 
-		// ❌ REMOVER A FORMATAÇÃO AQUI: Não use .toLocaleString()
 		return valorTotalIntervalo;
 	});
 
-	console.log(valores); // Agora irá mostrar [39209.20, 45123.50, ...]
-
-	const parent = `
-   
-         <canvas id="myChart"></canvas>
-   
-    `;
-
+	// ------------------------------------------------------------
+	// 4️⃣ Inserir Canvas
+	// ------------------------------------------------------------
+	const parent = `<canvas id="myChart" style="max-width: 90%; margin-top: 40px;"></canvas>`;
 	document.body.insertAdjacentHTML("beforeend", parent);
 
 	const ctx = document.getElementById("myChart");
 
+	// ------------------------------------------------------------
+	// 5️⃣ Criar gráfico
+	// ------------------------------------------------------------
 	new Chart(ctx, {
 		type: "bar",
 		data: {
-			labels: intervalos,
+			labels: labelsSimples,
 			datasets: [
 				{
-					label: "Valor Total", // Rótulo mais descritivo
-					data: valores, // Array de numbers
+					label: "Valor Total",
+					data: valores,
 					backgroundColor: "rgba(54, 162, 235, 0.5)",
 					borderColor: "rgba(54, 162, 235, 1)",
 					borderWidth: 1,
@@ -321,28 +341,29 @@ function relatorio3() {
 			scales: {
 				y: {
 					beginAtZero: true,
-					// 💡 Opcional: Adicionar formatação de moeda ao eixo Y (Display)
 					ticks: {
-						callback: function (value, index, ticks) {
+						callback: function (value) {
 							return "R$ " + value.toLocaleString("pt-BR");
 						},
 					},
 				},
 			},
-			// 💡 Opcional: Adicionar formatação de moeda no Tooltip
 			plugins: {
 				tooltip: {
 					callbacks: {
+						title: function (tooltipItems) {
+							const index = tooltipItems[0].dataIndex;
+							return labelsCompletos[index]; // 👈 agora 100% correto
+						},
 						label: function (context) {
-							let label = context.dataset.label || "";
-
-							if (label) {
-								label += ": ";
-							}
-							if (context.parsed.y !== null) {
-								label += new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(context.parsed.y);
-							}
-							return label;
+							let valor = context.parsed.y;
+							return (
+								"Valor: " +
+								valor.toLocaleString("pt-BR", {
+									style: "currency",
+									currency: "BRL",
+								})
+							);
 						},
 					},
 				},
