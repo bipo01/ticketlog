@@ -244,3 +244,9 @@ form {
 	border-color: #007bff; /* Borda com a mesma cor do fundo */
 	z-index: 1; /* Garante que a borda do botão selecionado não seja cortada pelos vizinhos */
 }
+
+#chart-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
