@@ -24,6 +24,8 @@ dropzone.addEventListener("drop", (e) => {
     dataTransfer.items.add(files[0]);
     fileInput.files = dataTransfer.files;
 
+    fileInput.dispatchEvent(new Event("input"));
+
     // Feedback de arquivo selecionado
     dropzone.querySelector(
       "p"
@@ -109,6 +111,7 @@ fileInput.addEventListener("input", (e) => {
           id: row[0],
           placa: row[5], // Coluna F
           km: row[16], // Coluna Q
+          data: formatExcelDate(row[4]),
         };
         checarDuplicatasArr.push(obj);
       }
@@ -194,7 +197,9 @@ fileInput.addEventListener("input", (e) => {
               const placaKm = `${arr[0].placa} | KM: ${arr[0].km}`;
 
               // Mapeia os IDs (primeira coluna) e o campo da placa/KM (segunda coluna)
-              const idList = arr.map((item) => `${item.id}`).join(" | ");
+              const idList = arr
+                .map((item) => `${item.id} (${item.data})`)
+                .join("<br/>");
 
               return `
     <tr>
@@ -215,3 +220,28 @@ fileInput.addEventListener("input", (e) => {
 
   reader.readAsArrayBuffer(file);
 });
+
+function formatExcelDate(serial) {
+  if (!serial || typeof serial !== "number") return null;
+
+  const parsed = XLSX.SSF.parse_date_code(serial);
+  if (!parsed) return null;
+
+  const jsDate = new Date(
+    parsed.y,
+    parsed.m - 1,
+    parsed.d,
+    parsed.H,
+    parsed.M,
+    parsed.S
+  );
+
+  return jsDate.toLocaleString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+}
