@@ -1,252 +1,325 @@
 /* Estilos Gerais */
 body {
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-	background-color: #f4f7f6;
-	margin: 20px;
-	color: #333;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f6;
+  margin: 20px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Estilo do Formulário (Container para o Dropzone e Botão) */
 form {
-	background-color: #fff;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	margin-bottom: 30px;
-	width: 90%;
-	max-width: 600px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 /* Dropzone Styles */
 #dropzone {
-	border: 3px dashed #ccc;
-	border-radius: 10px;
-	padding: 40px 20px;
-	text-align: center;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	width: 100%;
-	height: 100%;
-	flex: 1; /* Permite ocupar todo o espaço vertical */
-	display: flex; /* Permite centralizar o texto */
-	align-items: center; /* Centraliza verticalmente */
-	justify-content: center; /* Centraliza horizontalmente */
+  border: 3px dashed #ccc;
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
+  flex: 1; /* Permite ocupar todo o espaço vertical */
+  display: flex; /* Permite centralizar o texto */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
 }
 #dropzone.dragover {
-	border-color: #007bff;
-	background-color: #e9f5ff;
+  border-color: #007bff;
+  background-color: #e9f5ff;
 }
 
 #dropzone p {
-	margin: 0;
-	font-size: 1.1em;
-	color: #666;
+  margin: 0;
+  font-size: 1.1em;
+  color: #666;
 }
 
 /* Esconde o input file original */
 #file {
-	display: none;
+  display: none;
 }
 
 /* Estilo da Tabela de Resultados */
 #table1 {
-	width: 90%;
-	max-width: 800px;
-	border-collapse: collapse;
-	margin-top: 20px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	background-color: #fff;
-	border-radius: 8px;
-	overflow: hidden; /* Para garantir que o border-radius funcione */
+  width: 90%;
+  max-width: 800px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden; /* Para garantir que o border-radius funcione */
 }
 
 #table1 h1 {
-	font-size: 1.2em; /* Reduzindo o tamanho da fonte */
-	margin: 0;
-	font-weight: 600;
+  font-size: 1.2em; /* Reduzindo o tamanho da fonte */
+  margin: 0;
+  font-weight: 600;
 }
 
 #table1 tr:first-child td h1 {
-	font-size: 1.5em; /* Destaca o Valor Total */
-	font-weight: bold;
+  font-size: 1.5em; /* Destaca o Valor Total */
+  font-weight: bold;
 }
 
 #table1 td {
-	padding: 15px 20px;
-	text-align: left;
-	border: 1px solid #eee;
-	transition: background-color 0.2s;
+  padding: 15px 20px;
+  text-align: left;
+  border: 1px solid #eee;
+  transition: background-color 0.2s;
 }
 
 /* Cabeçalho da Tabela (ou Linhas de Dados) */
 #table1 tr:nth-child(odd) {
-	background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 /* Estilo para a coluna de valor */
 #table1 tr td:last-child {
-	text-align: right;
-	font-weight: bold;
-	color: #28a745; /* Cor verde para os valores */
+  text-align: right;
+  font-weight: bold;
+  color: #28a745; /* Cor verde para os valores */
 }
 
 /* Destaque para a linha do Valor Total */
 #table1 tr:first-child {
-	background-color: #d4edda;
-	color: #155724;
+  background-color: #d4edda;
+  color: #155724;
 }
 
 #table1 tr:first-child td:last-child {
-	color: #155724;
-	font-size: 1.6em;
+  color: #155724;
+  font-size: 1.6em;
 }
 
 /* Estilo da Tabela de Detalhes (Relatório 2) */
 #table2 {
-	width: 90%;
-	/* max-width: 800px; */
-	border-collapse: collapse;
-	margin-top: 20px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	background-color: #fff;
-	border-radius: 8px;
-	overflow: hidden;
-	font-size: 0.95em;
-	/* NOVO: Aplica a borda principal da tabela */
-	border: 1px solid #dee2e6;
+  width: 90%;
+  /* max-width: 800px; */
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.95em;
+  /* NOVO: Aplica a borda principal da tabela */
+  border: 1px solid #dee2e6;
 }
 
 /* Cabeçalho da Tabela */
 #table2 thead {
-	background-color: #343a40;
-	color: #fff;
+  background-color: #343a40;
+  color: #fff;
 }
 
 .ordered.asc {
-	background: #28a745;
+  background: #28a745;
 }
 .ordered.dec {
-	background: rgb(187, 114, 114);
+  background: rgb(187, 114, 114);
 }
 
 #table2 th {
-	cursor: pointer;
-	padding: 12px 15px;
-	/* ALTERADO: Centraliza o texto do cabeçalho */
-	text-align: center;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-	/* NOVO: Adiciona borda a cada célula do cabeçalho */
-	border: 1px solid #dee2e6;
+  cursor: pointer;
+  padding: 12px 15px;
+  /* ALTERADO: Centraliza o texto do cabeçalho */
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* NOVO: Adiciona borda a cada célula do cabeçalho */
+  border: 1px solid #dee2e6;
 }
 
 /* Corpo da Tabela */
 #table2 tbody tr:nth-child(even) {
-	background-color: #f7f7f7;
+  background-color: #f7f7f7;
 }
 
 #table2 tbody tr:hover {
-	background-color: #e9ecef;
-	cursor: default;
+  background-color: #e9ecef;
+  cursor: default;
 }
 
 #table2 td {
-	padding: 10px 15px;
-	/* ALTERADO: Centraliza o texto das células */
-	text-align: center;
-	/* NOVO: Adiciona borda a cada célula do corpo */
-	border: 1px solid #dee2e6;
+  padding: 10px 15px;
+  /* ALTERADO: Centraliza o texto das células */
+  text-align: center;
+  /* NOVO: Adiciona borda a cada célula do corpo */
+  border: 1px solid #dee2e6;
 }
 
 /* Estilo específico para colunas (ajustado para centralização) */
 
 /* Coluna PLACA */
 #table2 td:nth-child(1) {
-	font-weight: bold;
-	color: #007bff;
+  font-weight: bold;
+  color: #007bff;
 }
 
 /* Coluna DATA */
 #table2 td:nth-child(2) {
-	color: #6c757d;
-	white-space: nowrap;
+  color: #6c757d;
+  white-space: nowrap;
 }
 
 /* Coluna KM/LITROS (Valor numérico) */
 #table2 td:nth-child(3) {
-	/* ALTERADO: O alinhamento à direita para números foi removido para centralizar */
-	font-weight: 600;
-	color: #28a745;
+  /* ALTERADO: O alinhamento à direita para números foi removido para centralizar */
+  font-weight: 600;
+  color: #28a745;
 }
 
 .selected {
-	background: #007bff;
+  background: #007bff;
 }
 
 /* Container das Abas */
 .abas {
-	display: flex; /* Alinha os botões lado a lado */
-	justify-content: center; /* Centraliza o grupo de botões */
-	margin-bottom: 20px; /* Espaço abaixo das abas */
-	padding: 0;
-	list-style: none;
-	border-radius: 8px; /* Borda arredondada no container se desejar */
-	overflow: hidden; /* Garante que o border-radius funcione nas bordas laterais */
+  display: flex; /* Alinha os botões lado a lado */
+  justify-content: center; /* Centraliza o grupo de botões */
+  margin-bottom: 20px; /* Espaço abaixo das abas */
+  padding: 0;
+  list-style: none;
+  border-radius: 8px; /* Borda arredondada no container se desejar */
+  overflow: hidden; /* Garante que o border-radius funcione nas bordas laterais */
 }
 
 /* Botão de Aba Individual */
 .aba {
-	/* Aparência básica do botão */
-	background-color: #f8f9fa; /* Fundo cinza claro */
-	color: #343a40; /* Texto escuro */
-	border: 1px solid #ced4da; /* Borda suave */
-	padding: 10px 20px;
-	cursor: pointer;
-	font-size: 1em;
-	font-weight: 600;
-	transition: all 0.3s ease;
+  /* Aparência básica do botão */
+  background-color: #f8f9fa; /* Fundo cinza claro */
+  color: #343a40; /* Texto escuro */
+  border: 1px solid #ced4da; /* Borda suave */
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: all 0.3s ease;
 
-	/* Remove bordas internas duplicadas */
-	margin-left: -1px;
+  /* Remove bordas internas duplicadas */
+  margin-left: -1px;
 }
 
 /* Ajuste de bordas nas extremidades */
 .aba:first-child {
-	border-top-left-radius: 8px;
-	border-bottom-left-radius: 8px;
-	margin-left: 0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  margin-left: 0;
 }
 
 .aba:last-child {
-	border-top-right-radius: 8px;
-	border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 /* Efeito Hover */
 .aba:hover:not(.selected) {
-	background-color: #e9ecef; /* Fundo um pouco mais escuro ao passar o mouse */
-	color: #000;
+  background-color: #e9ecef; /* Fundo um pouco mais escuro ao passar o mouse */
+  color: #000;
 }
 
 /* Estado Selecionado (Aba Ativa) */
 .aba.selected {
-	background-color: #007bff; /* Fundo azul primário */
-	color: #fff; /* Texto branco */
-	border-color: #007bff; /* Borda com a mesma cor do fundo */
-	z-index: 1; /* Garante que a borda do botão selecionado não seja cortada pelos vizinhos */
+  background-color: #007bff; /* Fundo azul primário */
+  color: #fff; /* Texto branco */
+  border-color: #007bff; /* Borda com a mesma cor do fundo */
+  z-index: 1; /* Garante que a borda do botão selecionado não seja cortada pelos vizinhos */
 }
 
 #chart-box {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo da Tabela de Detalhes (Relatório 4) */
+#table4 {
+  width: 90%;
+  /* max-width: 800px; */
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.95em;
+  /* NOVO: Aplica a borda principal da tabela */
+  border: 1px solid #dee2e6;
+}
+
+/* Cabeçalho da Tabela */
+#table4 thead {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.ordered.asc {
+  background: #28a745;
+}
+.ordered.dec {
+  background: rgb(187, 114, 114);
+}
+
+#table4 th {
+  cursor: pointer;
+  padding: 12px 15px;
+  /* ALTERADO: Centraliza o texto do cabeçalho */
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* NOVO: Adiciona borda a cada célula do cabeçalho */
+  border: 1px solid #dee2e6;
+}
+
+/* Corpo da Tabela */
+#table4 tbody tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+#table4 tbody tr:hover {
+  background-color: #e9ecef;
+  cursor: default;
+}
+
+#table4 td {
+  padding: 10px 15px;
+  /* ALTERADO: Centraliza o texto das células */
+  text-align: center;
+  /* NOVO: Adiciona borda a cada célula do corpo */
+  border: 1px solid #dee2e6;
+}
+
+/* Estilo específico para colunas (ajustado para centralização) */
+
+/* Coluna PLACA */
+#table4 td:nth-child(1) {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Coluna DATA */
+#table4 td:nth-child(2) {
+  color: #000;
+  font-weight: bold;
+  white-space: nowrap;
 }
