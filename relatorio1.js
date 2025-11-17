@@ -2,10 +2,10 @@
 /* 🔥 RELATÓRIO 1 — GERAL                          */
 /* ----------------------------------------------- */
 function relatorio1() {
-  reset();
-  document.querySelector(".abas")?.remove();
+	reset();
+	document.querySelector(".abas")?.remove();
 
-  let html = `
+	let html = `
   <div class="abas">
     <button id="relatorio1" class="aba selected">Relatório Geral</button>
     <button id="relatorio2" class="aba">Planilha</button>
@@ -27,19 +27,21 @@ function relatorio1() {
 </tr>
 `;
 
-  if (duplicatas.length === 0) {
-    html += `<tr><td colspan="2">Nenhuma duplicata encontrada</td></tr>`;
-  } else {
-    for (const grupo of duplicatas) {
-      const { placa, km } = grupo[0];
-      html += `
+	if (duplicatas.length === 0) {
+		html += `<tr><td colspan="2">Nenhuma duplicata encontrada</td></tr>`;
+	} else {
+		for (const grupo of duplicatas) {
+			const { placa, km } = grupo[0];
+			html += `
       <tr>
         <td><h1>${placa} | KM: ${km}</h1></td>
-        <td>${grupo.map((g) => `${g.id} (${g.data})`).join("<br>")}</td>
+        <td>${grupo.map((g) => `${g.id} (${g.data}) - ${g.tipoCombustivel} - ${g.qtdLitros} Litros - R$ ${g.valorEmissao}`).join("<br>")}</td>
       </tr>`;
-    }
-  }
+		}
+	}
 
-  html += `</table>`;
-  document.body.insertAdjacentHTML("beforeend", html);
+	html += `</table>`;
+	document.querySelector("footer").insertAdjacentHTML("beforebegin", html);
+
+	insertSetas();
 }

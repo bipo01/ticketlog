@@ -1,8 +1,8 @@
 function relatorio4() {
-  reset();
+	reset();
 
-  if (!table4) {
-    let html = `
+	if (!table4) {
+		let html = `
     <table id="table4">
       <thead>
         <th class="asc ordered">ORD</th>
@@ -18,27 +18,25 @@ function relatorio4() {
       <tbody>
     `;
 
-    for (const index in viaturas) {
-      const viatura = viaturas[index];
-      const rowsViatura = body.filter((row) => row[5] === viatura);
-      const modelo = rowsViatura[0][7];
-      const propriedade = rowsViatura[0][30];
-      const contrato = rowsViatura[0][31];
+		for (const index in viaturas) {
+			const viatura = viaturas[index];
+			const rowsViatura = body.filter((row) => row[5] === viatura);
+			const modelo = rowsViatura[0][7];
+			const propriedade = rowsViatura[0][30];
+			const contrato = rowsViatura[0][31];
 
-      const consumoMedioArr = rowsViatura.map((row) => row[18]);
-      const consumoMédio = (
-        consumoMedioArr.reduce((acc, cur) => acc + cur) / consumoMedioArr.length
-      ).toFixed(2);
+			const consumoMedioArr = rowsViatura.map((row) => (row[18] ? row[18] : 0));
+			const consumoMédio = (consumoMedioArr.reduce((acc, cur) => acc + cur) / consumoMedioArr.length).toFixed(2);
 
-      const vezesAbastecidas = rowsViatura.length;
-      const gastoTotal = rowsViatura
-        .reduce((acc, cur) => {
-          const preco = cur[19];
-          return acc + preco;
-        }, 0)
-        .toFixed(2);
-      const kmRodados = rowsViatura.reduce((acc, cur) => acc + cur[17], 0);
-      html += `
+			const vezesAbastecidas = rowsViatura.length;
+			const gastoTotal = rowsViatura
+				.reduce((acc, cur) => {
+					const preco = cur[19];
+					return acc + preco;
+				}, 0)
+				.toFixed(2);
+			const kmRodados = rowsViatura.reduce((acc, cur) => acc + cur[17], 0);
+			html += `
       <tr>
         <td>${Number(index) + 1}</td>
         <td>${viatura}</td>
@@ -50,61 +48,55 @@ function relatorio4() {
         <td>${propriedade}</td>
         <td>${contrato}</td>
       </tr>`;
-    }
+		}
 
-    html += `</tbody></table>`;
-    table4 = html;
-  }
+		html += `</tbody></table>`;
+		table4 = html;
+	}
 
-  document.body.insertAdjacentHTML("beforeend", table4);
+	document.querySelector("footer").insertAdjacentHTML("beforebegin", table4);
+
+	insertSetas();
 }
 
 /* ----------------------------------------------- */
 /* 🔥 SORT — COMPATÍVEL COM updateUI4              */
 /* ----------------------------------------------- */
 function updateUI4(col) {
-  const sortedBy = document.querySelector(".dec") ? "dec" : "asc";
-  const isStringCol = col === 1;
+	const sortedBy = document.querySelector(".dec") ? "dec" : "asc";
+	const isStringCol = col === 1 || col === 2 || col === 7 || col === 8;
 
-  const bodyTable4 = [...document.querySelectorAll("#table4 tbody tr")];
+	const bodyTable4 = [...document.querySelectorAll("#table4 tbody tr")];
 
-  if (sortedBy === "asc") {
-    bodyTable4.sort((a, b) => {
-      if (isStringCol) {
-        // Classificação crescente para strings (Placa)
-        return String(a.querySelectorAll("td")[col].textContent).localeCompare(
-          String(b.querySelectorAll("td")[col].textContent)
-        );
-      } else {
-        // Classificação crescente para números (CÓDIGO, DATA, KM/LITROS)
-        return (
-          Number(a.querySelectorAll("td")[col].textContent) -
-          Number(b.querySelectorAll("td")[col].textContent)
-        );
-      }
-    });
-  } else {
-    bodyTable4.sort((a, b) => {
-      if (isStringCol) {
-        // Classificação decrescente para strings (Placa)
-        // Inverte a ordem da comparação de strings
-        return String(b.querySelectorAll("td")[col].textContent).localeCompare(
-          String(a.querySelectorAll("td")[col].textContent)
-        );
-      } else {
-        // Classificação decrescente para números (CÓDIGO, DATA, KM/LITROS)
-        return (
-          Number(b.querySelectorAll("td")[col].textContent) -
-          Number(a.querySelectorAll("td")[col].textContent)
-        );
-      }
-    });
-  }
+	if (sortedBy === "asc") {
+		bodyTable4.sort((a, b) => {
+			if (isStringCol) {
+				// Classificação crescente para strings (Placa)
+				return String(a.querySelectorAll("td")[col].textContent).localeCompare(String(b.querySelectorAll("td")[col].textContent));
+			} else {
+				// Classificação crescente para números (CÓDIGO, DATA, KM/LITROS)
+				return Number(a.querySelectorAll("td")[col].textContent) - Number(b.querySelectorAll("td")[col].textContent);
+			}
+		});
+	} else {
+		bodyTable4.sort((a, b) => {
+			if (isStringCol) {
+				// Classificação decrescente para strings (Placa)
+				// Inverte a ordem da comparação de strings
+				return String(b.querySelectorAll("td")[col].textContent).localeCompare(String(a.querySelectorAll("td")[col].textContent));
+			} else {
+				// Classificação decrescente para números (CÓDIGO, DATA, KM/LITROS)
+				return Number(b.querySelectorAll("td")[col].textContent) - Number(a.querySelectorAll("td")[col].textContent);
+			}
+		});
+	}
 
-  const tbody = document.querySelector("tbody");
-  tbody.innerHTML = "";
+	const tbody = document.querySelector("tbody");
+	tbody.innerHTML = "";
 
-  bodyTable4.forEach((tr) => {
-    tbody.append(tr);
-  });
+	bodyTable4.forEach((tr) => {
+		tbody.append(tr);
+	});
+
+	filtrarSearchBar();
 }

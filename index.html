@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Análise de Ticket Log</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <form enctype="multipart/form-data">
-      <div id="dropzone">
-        <p>Arraste e solte o arquivo Excel aqui ou clique para selecionar.</p>
-        <input
-          type="file"
-          name="file"
-          id="file"
-          accept=".xlsx, .xls, .ods, .csv"
-        />
-      </div>
-    </form>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Análise de Ticket Log</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<form enctype="multipart/form-data">
+			<div id="dropzone">
+				<p>Arraste e solte o arquivo Excel aqui ou clique para selecionar.</p>
+				<input type="file" name="file" id="file" accept=".xlsx, .xls, .ods, .csv" />
+			</div>
+		</form>
 
-    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="data.js"></script>
-    <script src="relatorio1.js"></script>
-    <script src="relatorio2.js"></script>
-    <script src="relatorio3.js"></script>
-    <script src="relatorio4.js"></script>
-    <script src="script.js"></script>
-  </body>
+		<div class="setas hidden">
+			<a href="#">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M12 5L5 12M12 5L19 12M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+				</svg>
+			</a>
+			<a href="#footer">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M12 19L5 12M12 19L19 12M12 19V5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+				</svg>
+			</a>
+		</div>
+
+		<footer id="footer">Feito por João Bispo</footer>
+
+		<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+		<script src="data.js"></script>
+		<script src="relatorio1.js"></script>
+		<script src="relatorio2.js"></script>
+		<script src="relatorio3.js"></script>
+		<script src="relatorio4.js"></script>
+		<script src="script.js"></script>
+	</body>
 </html>
